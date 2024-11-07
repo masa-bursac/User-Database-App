@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApplicationBack.Model;
 using WebApplicationBack.Repositories;
 
 namespace WebApplicationBack.Services
@@ -23,7 +24,12 @@ namespace WebApplicationBack.Services
         {
             UserSqlRepository = userSqlRepository;
         }
-       
+
+        public void SaveUser(User user, MyDbContext dbContext)
+        {
+            user.UserType = UserType.user;
+            UserSqlRepository.saveUser(user);
+        }
     }
 
 }

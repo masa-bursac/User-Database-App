@@ -46,5 +46,7 @@ namespace WebApplicationBack.Model
             UserType = userType;
             Image = new byte[0]; 
         }
+
+        public User() { }
     }
 }
