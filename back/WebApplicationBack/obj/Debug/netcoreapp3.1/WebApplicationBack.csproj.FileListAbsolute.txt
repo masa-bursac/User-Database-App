@@ -36,7 +36,7 @@ C:\Users\masa\Documents\GitHub\AltitudeIT-zadatak\back\WebApplicationBack\obj\De
 C:\Users\masa\Documents\GitHub\AltitudeIT-zadatak\back\WebApplicationBack\obj\Debug\netcoreapp3.1\staticwebassets\WebApplicationBack.StaticWebAssets.xml
 C:\Users\masa\Documents\GitHub\AltitudeIT-zadatak\back\WebApplicationBack\obj\Debug\netcoreapp3.1\scopedcss\bundle\WebApplicationBack.styles.css
 C:\Users\masa\Documents\GitHub\AltitudeIT-zadatak\back\WebApplicationBack\obj\Debug\netcoreapp3.1\WebApplicationBack.RazorTargetAssemblyInfo.cache
-C:\Users\masa\Documents\GitHub\AltitudeIT-zadatak\back\WebApplicationBack\obj\Debug\netcoreapp3.1\WebApplicationBack.csproj.CopyComplete
 C:\Users\masa\Documents\GitHub\AltitudeIT-zadatak\back\WebApplicationBack\obj\Debug\netcoreapp3.1\WebApplicationBack.dll
 C:\Users\masa\Documents\GitHub\AltitudeIT-zadatak\back\WebApplicationBack\obj\Debug\netcoreapp3.1\WebApplicationBack.pdb
 C:\Users\masa\Documents\GitHub\AltitudeIT-zadatak\back\WebApplicationBack\obj\Debug\netcoreapp3.1\WebApplicationBack.genruntimeconfig.cache
+C:\Users\masa\Documents\GitHub\AltitudeIT-zadatak\back\WebApplicationBack\obj\Debug\netcoreapp3.1\WebApplicationBack.csproj.AssemblyReference.cache
