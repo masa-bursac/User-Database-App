@@ -40,3 +40,7 @@ C:\Users\masa\Documents\GitHub\AltitudeIT-zadatak\back\WebApplicationBack\obj\De
 C:\Users\masa\Documents\GitHub\AltitudeIT-zadatak\back\WebApplicationBack\obj\Debug\netcoreapp3.1\WebApplicationBack.pdb
 C:\Users\masa\Documents\GitHub\AltitudeIT-zadatak\back\WebApplicationBack\obj\Debug\netcoreapp3.1\WebApplicationBack.genruntimeconfig.cache
 C:\Users\masa\Documents\GitHub\AltitudeIT-zadatak\back\WebApplicationBack\obj\Debug\netcoreapp3.1\WebApplicationBack.csproj.AssemblyReference.cache
+C:\Users\masa\Documents\GitHub\AltitudeIT-zadatak\back\WebApplicationBack\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\masa\Documents\GitHub\AltitudeIT-zadatak\back\WebApplicationBack\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
+C:\Users\masa\Documents\GitHub\AltitudeIT-zadatak\back\WebApplicationBack\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
+C:\Users\masa\Documents\GitHub\AltitudeIT-zadatak\back\WebApplicationBack\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll

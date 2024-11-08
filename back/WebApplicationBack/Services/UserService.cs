@@ -1,7 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using WebApplicationBack.Model;
 using WebApplicationBack.Repositories;
@@ -12,6 +16,7 @@ namespace WebApplicationBack.Services
     {
         private IUserRepository UserRepository { get; }
         private UserRepository UserSqlRepository { get; set; }
+        private string Role { get; set; }
 
         public UserService(IUserRepository userRepository)
         {
@@ -40,6 +45,36 @@ namespace WebApplicationBack.Services
         public User FindByEmailAndPassword(string email, string password)
         {
             return UserSqlRepository.FindByUsernameAndPassword(email, password);
+        }
+
+        public String GenerateJwtToken(User user)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            
+            if(user.UserType == UserType.user)
+            {
+                Role = "user";
+            }
+            else
+            {
+                Role = "manager";
+            }
+
+            IdentityOptions options = new IdentityOptions();
+            SecurityTokenDescriptor tokenDeskriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new[]
+                {
+                    new Claim("id", user.Id.ToString()),
+                    new Claim("role", Role),
+                }),
+                Expires = DateTime.UtcNow.AddHours(1),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.ASCII.GetBytes("QKcOa8xPopVOliV6tpvuWmoKn4MOydSeIzUt4W4r1UlU2De7dTUYMlrgv3rU")), SecurityAlgorithms.HmacSha256Signature)
+            };
+
+            var token = tokenHandler.CreateToken(tokenDeskriptor);
+            return tokenHandler.WriteToken(token);
+
         }
     }
 
