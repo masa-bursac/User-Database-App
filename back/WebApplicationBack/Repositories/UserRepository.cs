@@ -21,6 +21,14 @@ namespace WebApplicationBack.Repositories
         {
             return dbContext.Users.ToList();
         }
+
+        public void saveUser(User user)
+        {
+            int id = dbContext.Users.ToList().Count(); //iako je stavljeno da se sam inkrementira to ne radi, pa je dodato manuelno
+            user.Id = id+1;
+            dbContext.Users.Add(user);
+            dbContext.SaveChanges();
+        }
     }
 }
 

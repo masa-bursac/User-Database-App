@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApplicationBack.Model;
 using WebApplicationBack.Repositories;
 
 namespace WebApplicationBack.Services
@@ -23,7 +24,15 @@ namespace WebApplicationBack.Services
         {
             UserSqlRepository = userSqlRepository;
         }
-       
+
+        public void SaveUser(User user, MyDbContext dbContext)
+        {
+            user.UserType = UserType.user;
+            TimeZoneInfo timeZone = TimeZoneInfo.FindSystemTimeZoneById("Central European Standard Time");
+            user.DateOfBirth = TimeZoneInfo.ConvertTime(user.DateOfBirth, timeZone);
+            user.Password = new Microsoft.AspNetCore.Identity.PasswordHasher<object>().HashPassword(null, user.Password);
+            UserSqlRepository.saveUser(user);
+        }
     }
 
 }
