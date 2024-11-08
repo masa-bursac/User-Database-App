@@ -33,9 +33,27 @@ namespace WebApplicationBack.Repositories
 
         public User FindByUsernameAndPassword(string email, string password)
         {
-            User user = (from n in dbContext.Users where n.Email == email && n.Password == password select n).FirstOrDefault();
+            var passwordHasher = new PasswordHasher<object>();
 
-            return user;
+            User user = dbContext.Users.FirstOrDefault(n => n.Email == email);
+
+            if (user != null)
+            {
+                Console.WriteLine(password);
+                Console.WriteLine(user.Password);
+                var result = passwordHasher.VerifyHashedPassword(null, user.Password, password);
+
+                if (result == PasswordVerificationResult.Success)
+                {
+                    return user;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+
+            return null;
         }
     }
 }
