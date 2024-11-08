@@ -30,6 +30,7 @@ namespace WebApplicationBack.Services
             user.UserType = UserType.user;
             TimeZoneInfo timeZone = TimeZoneInfo.FindSystemTimeZoneById("Central European Standard Time");
             user.DateOfBirth = TimeZoneInfo.ConvertTime(user.DateOfBirth, timeZone);
+            user.Password = new Microsoft.AspNetCore.Identity.PasswordHasher<object>().HashPassword(null, user.Password);
             UserSqlRepository.saveUser(user);
         }
     }
