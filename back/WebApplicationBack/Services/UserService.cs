@@ -28,6 +28,8 @@ namespace WebApplicationBack.Services
         public void SaveUser(User user, MyDbContext dbContext)
         {
             user.UserType = UserType.user;
+            TimeZoneInfo timeZone = TimeZoneInfo.FindSystemTimeZoneById("Central European Standard Time");
+            user.DateOfBirth = TimeZoneInfo.ConvertTime(user.DateOfBirth, timeZone);
             UserSqlRepository.saveUser(user);
         }
     }
