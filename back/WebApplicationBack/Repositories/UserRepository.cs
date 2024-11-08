@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -28,6 +29,13 @@ namespace WebApplicationBack.Repositories
             user.Id = id+1;
             dbContext.Users.Add(user);
             dbContext.SaveChanges();
+        }
+
+        public User FindByUsernameAndPassword(string email, string password)
+        {
+            User user = (from n in dbContext.Users where n.Email == email && n.Password == password select n).FirstOrDefault();
+
+            return user;
         }
     }
 }

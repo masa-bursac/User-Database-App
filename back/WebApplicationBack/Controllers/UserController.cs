@@ -41,5 +41,23 @@ namespace WebApplicationBack.Controllers
             return Ok();
         }
 
+        [HttpPost("login")]
+        public IActionResult Login([FromBody] User u)
+        {
+            User user = userService.FindByEmailAndPassword(u.Email, u.Password);
+
+            return Ok(user);
+           
+            /*if (user != null)
+            {
+                String jwtToken = user.GenerateJwtToken(user);
+                return Ok(jwtToken);
+            }
+            else
+            {
+                return Unauthorized();
+            }*/
+        }
+
     }
 }

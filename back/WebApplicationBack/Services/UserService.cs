@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -30,8 +31,15 @@ namespace WebApplicationBack.Services
             user.UserType = UserType.user;
             TimeZoneInfo timeZone = TimeZoneInfo.FindSystemTimeZoneById("Central European Standard Time");
             user.DateOfBirth = TimeZoneInfo.ConvertTime(user.DateOfBirth, timeZone);
-            user.Password = new Microsoft.AspNetCore.Identity.PasswordHasher<object>().HashPassword(null, user.Password);
+            Console.WriteLine(user.Password);
+            user.Password = new PasswordHasher<object>().HashPassword(null, user.Password);
+            Console.WriteLine(user.Password);
             UserSqlRepository.saveUser(user);
+        }
+
+        public User FindByEmailAndPassword(string email, string password)
+        {
+            return UserSqlRepository.FindByUsernameAndPassword(email, password);
         }
     }
 
