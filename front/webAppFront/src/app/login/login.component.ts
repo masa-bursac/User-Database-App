@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
+import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-login',
@@ -14,13 +16,22 @@ export class LoginComponent implements OnInit {
 
   hide: boolean = true;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
       email: [null, [Validators.required]],
       password: [null, [Validators.required]]
     });
+  }
+
+  getDecodedToken(token: string): any{
+    try{
+      return jwtDecode(token);
+    }
+    catch(Error){
+      token = "";
+    }
   }
 
   submitForm(): void {
@@ -33,19 +44,17 @@ export class LoginComponent implements OnInit {
       password: this.password
     }
 
-    console.log(body);
+    this.authService.login(body).subscribe(data => {
 
-    /*this.authService.login(body).subscribe(data => {
-      const user = data;
-      localStorage.setItem('user', JSON.stringify(user));
-      localStorage.setItem('token', JSON.stringify(user.token));
+      console.log(data);
+      localStorage.setItem("jwtToken", data);
+      let tokenInfo = this.getDecodedToken(data);
+      localStorage.setItem('id', tokenInfo.id);
+      localStorage.setItem('role', tokenInfo.role);
 
-      sessionStorage.setItem('username', user.username);
-      let authString = 'Basic ' + btoa(user.username + ':' + user.password);
-      sessionStorage.setItem('basicauth', authString);
     }, error => {
-      alert("");
-    })*/
+      alert("User not found! Check your email and password!");
+    })
   }
 
 }

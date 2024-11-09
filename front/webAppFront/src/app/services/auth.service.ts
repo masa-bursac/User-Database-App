@@ -14,4 +14,8 @@ export class AuthService {
   public registration(body: any) : Observable<any>{ 
     return this.http.post(auth_url, body);
   }
+
+  public login(body: any) : Observable<any>{
+    return this.http.post(auth_url+"/login", body,  { responseType: 'text' as 'json'});
+  }
 }

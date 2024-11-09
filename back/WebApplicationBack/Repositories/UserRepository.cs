@@ -39,8 +39,6 @@ namespace WebApplicationBack.Repositories
 
             if (user != null)
             {
-                Console.WriteLine(password);
-                Console.WriteLine(user.Password);
                 var result = passwordHasher.VerifyHashedPassword(null, user.Password, password);
 
                 if (result == PasswordVerificationResult.Success)
