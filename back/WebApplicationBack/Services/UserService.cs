@@ -57,7 +57,7 @@ namespace WebApplicationBack.Services
             }
             else
             {
-                Role = "manager";
+                Role = "admin";
             }
 
             IdentityOptions options = new IdentityOptions();

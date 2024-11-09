@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { jwtDecode } from 'jwt-decode';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
 
   hide: boolean = true;
 
-  constructor(private fb: FormBuilder, private authService: AuthService) { }
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) { }
 
   public hasError = (controlName: string, errorName: string) =>{
     return this.validateForm.controls[controlName].hasError(errorName);
@@ -51,10 +52,12 @@ export class LoginComponent implements OnInit {
     if(this.validateForm.valid){
       this.authService.login(body).subscribe(data => {
 
-        localStorage.setItem("jwtToken", data);
-        let tokenInfo = this.getDecodedToken(data);
+        localStorage.setItem("jwtToken", JSON.stringify(data));
+        let tokenInfo = this.getDecodedToken( JSON.stringify(data));
         localStorage.setItem('id', tokenInfo.id);
         localStorage.setItem('role', tokenInfo.role);
+
+        this.router.navigate(['/home'])
 
       }, error => {
         alert("User not found! Check your email and password!");

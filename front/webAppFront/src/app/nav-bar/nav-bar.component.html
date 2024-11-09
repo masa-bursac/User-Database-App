@@ -5,5 +5,5 @@
     <div class="spacer"></div>
       <a mat-button routerLink="/registration">Registration</a>
       <a mat-button routerLink="/login">Login</a>
-      <a mat-button (click)="LogOut()">Logout</a>
+      <a *ngIf="role == 'user' || role == 'admin'" mat-button (click)="LogOut()">Logout</a>
 </mat-toolbar>
