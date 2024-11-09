@@ -56,6 +56,7 @@ export class LoginComponent implements OnInit {
         let tokenInfo = this.getDecodedToken( JSON.stringify(data));
         localStorage.setItem('id', tokenInfo.id);
         localStorage.setItem('role', tokenInfo.role);
+        localStorage.setItem('token', data);
 
         this.router.navigate(['/home'])
 
