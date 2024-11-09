@@ -18,9 +18,13 @@ export class LoginComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private authService: AuthService) { }
 
+  public hasError = (controlName: string, errorName: string) =>{
+    return this.validateForm.controls[controlName].hasError(errorName);
+  }
+
   ngOnInit(): void {
     this.validateForm = this.fb.group({
-      email: [null, [Validators.required]],
+      email: [null, [Validators.required, Validators.pattern('^(.+)@(.+)$')]],
       password: [null, [Validators.required]]
     });
   }
@@ -44,17 +48,20 @@ export class LoginComponent implements OnInit {
       password: this.password
     }
 
-    this.authService.login(body).subscribe(data => {
+    if(this.validateForm.valid){
+      this.authService.login(body).subscribe(data => {
 
-      console.log(data);
-      localStorage.setItem("jwtToken", data);
-      let tokenInfo = this.getDecodedToken(data);
-      localStorage.setItem('id', tokenInfo.id);
-      localStorage.setItem('role', tokenInfo.role);
+        localStorage.setItem("jwtToken", data);
+        let tokenInfo = this.getDecodedToken(data);
+        localStorage.setItem('id', tokenInfo.id);
+        localStorage.setItem('role', tokenInfo.role);
 
-    }, error => {
-      alert("User not found! Check your email and password!");
-    })
+      }, error => {
+        alert("User not found! Check your email and password!");
+      })
+    }else{
+      alert("All fields are reguired and format must be valid!")
+    }
   }
 
 }
