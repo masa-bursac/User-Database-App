@@ -74,7 +74,7 @@ namespace WebApplicationBack
 
             app.UseRouting();
 
-            app.UseCors();
+            app.UseCors("MyPolicy");
 
             app.UseAuthentication();
 
