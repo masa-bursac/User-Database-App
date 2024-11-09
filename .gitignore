@@ -557,13 +557,3 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 
-### VisualStudio Patch ###
-# Additional files built by Visual Studio
-
-# End of https://www.toptal.com/developers/gitignore/api/visualstudio,visualstudiocode,aspnetcore,angular
-back/WebApplicationBack/.vs/WebApplicationBack/v16/.suo
-back/WebApplicationBack/bin/Debug/netcoreapp3.1/WebApplicationBack.dll
-back/WebApplicationBack/bin/Debug/netcoreapp3.1/WebApplicationBack.pdb
-back/WebApplicationBack/obj/Debug/netcoreapp3.1/WebApplicationBack.dll
-back/WebApplicationBack/obj/Debug/netcoreapp3.1/WebApplicationBack.pdb
-back/WebApplicationBack/.vs/WebApplicationBack/v16/.suo

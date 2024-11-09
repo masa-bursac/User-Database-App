@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using WebApplicationBack.Model;
 using WebApplicationBack.Repositories;
@@ -25,12 +27,12 @@ namespace WebApplicationBack.Controllers
             userService = new UserService(new UserRepository(context));
         }
 
+        [Authorize(Policy = "AdminPolicy")]
         [HttpGet]
         public IActionResult Get()
         {
-            userRepository.dbContext = dbContext;
-            return Ok(userRepository.GetAll());
-
+             userRepository.dbContext = dbContext;
+             return Ok(userRepository.GetAll());
         }
 
         [HttpPost]
