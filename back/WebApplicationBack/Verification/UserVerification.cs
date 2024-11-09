@@ -35,7 +35,6 @@ namespace WebApplicationBack.Verification
 
         private bool VerifyPassword()
         {
-            Console.WriteLine(user.Password);
             if (user.Password.Equals(""))
                 return false;
             return true;

@@ -9,5 +9,6 @@ namespace WebApplicationBack.Repositories
     public interface IUserRepository
     {
         public List<User> GetAll();
+        User FindByUsernameAndPassword(string email, string password);
     }
 }

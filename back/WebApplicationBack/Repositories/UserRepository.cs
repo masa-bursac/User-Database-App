@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -28,6 +29,29 @@ namespace WebApplicationBack.Repositories
             user.Id = id+1;
             dbContext.Users.Add(user);
             dbContext.SaveChanges();
+        }
+
+        public User FindByUsernameAndPassword(string email, string password)
+        {
+            var passwordHasher = new PasswordHasher<object>();
+
+            User user = dbContext.Users.FirstOrDefault(n => n.Email == email);
+
+            if (user != null)
+            {
+                var result = passwordHasher.VerifyHashedPassword(null, user.Password, password);
+
+                if (result == PasswordVerificationResult.Success)
+                {
+                    return user;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+
+            return null;
         }
     }
 }
