@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { MatTableModule } from '@angular/material/table';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -19,6 +20,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegistrationComponent } from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
+import { ObserveUsersComponent } from './observe-users/observe-users.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import { LoginComponent } from './login/login.component';
     LandingPageComponent,
     NavBarComponent,
     RegistrationComponent,
-    LoginComponent
+    LoginComponent,
+    ObserveUsersComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +45,8 @@ import { LoginComponent } from './login/login.component';
     MatInputModule,
     MatNativeDateModule,
     MatIconModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTableModule
   ],
   providers: [
   
