@@ -57,6 +57,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('id', tokenInfo.id);
         localStorage.setItem('role', tokenInfo.role);
         localStorage.setItem('token', data);
+        localStorage.setItem('isDeleted', tokenInfo.isDeleted);
 
         this.router.navigate(['/home'])
 
