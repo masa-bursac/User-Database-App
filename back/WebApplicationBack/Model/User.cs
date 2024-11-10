@@ -21,6 +21,7 @@ namespace WebApplicationBack.Model
         public UserType UserType { get; set; }
         public String Token { get; set; }
         public byte[] Image { get; set; }
+        public Boolean IsDeleted { get; set; }
 
         public User(int id, string email, string password, string name, string surname, DateTime dateOfBirth, UserType userType, string token, string image)
         {
@@ -33,6 +34,7 @@ namespace WebApplicationBack.Model
             UserType = userType;
             Token = token;
             Image = Encoding.ASCII.GetBytes(image);
+            IsDeleted = false;
         }
 
         public User(int id, string email, string password, string name, string surname, DateTime dateOfBirth, UserType userType)
@@ -44,7 +46,8 @@ namespace WebApplicationBack.Model
             Surname = surname;
             DateOfBirth = dateOfBirth;
             UserType = userType;
-            Image = new byte[0]; 
+            Image = new byte[0];
+            IsDeleted = false;
         }
 
         public User() { }

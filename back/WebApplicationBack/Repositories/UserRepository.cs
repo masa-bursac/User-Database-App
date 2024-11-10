@@ -20,10 +20,10 @@ namespace WebApplicationBack.Repositories
 
         public List<User> GetAll()
         {
-            return dbContext.Users.ToList();
+            return dbContext.Users.Where(user => !user.IsDeleted).ToList();
         }
 
-        public void saveUser(User user)
+            public void saveUser(User user)
         {
             int id = dbContext.Users.ToList().Count(); //iako je stavljeno da se sam inkrementira to ne radi, pa je dodato manuelno
             user.Id = id+1;
@@ -52,6 +52,19 @@ namespace WebApplicationBack.Repositories
             }
 
             return null;
+        }
+
+        public User FindById(int userId)
+        {
+            User u = dbContext.Users.Find(userId);
+            return u;
+        }
+
+        public bool Update(User user)
+        {
+            dbContext.Users.Update(user);
+            dbContext.SaveChanges();
+            return true;
         }
     }
 }

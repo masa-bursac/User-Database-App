@@ -8,10 +8,14 @@ const auth_url = 'http://localhost:5000/api/user';
   providedIn: 'root'
 })
 export class UserService {
-
+  
   constructor(private http: HttpClient) { }
 
   public GetAllUsers() : Observable<any>{
     return this.http.get(auth_url);
+  }
+
+  public DeleteUser(id: number) : any {
+    return this.http.post(auth_url+'/delete', id);
   }
 }

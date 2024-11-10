@@ -10,5 +10,7 @@ namespace WebApplicationBack.Repositories
     {
         public List<User> GetAll();
         User FindByUsernameAndPassword(string email, string password);
+        User FindById(int userId);
+        bool Update(User user);
     }
 }

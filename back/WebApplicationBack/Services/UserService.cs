@@ -67,6 +67,7 @@ namespace WebApplicationBack.Services
                 {
                     new Claim("id", user.Id.ToString()),
                     new Claim(ClaimTypes.Role, Role),
+                    new Claim("isDeleted", user.IsDeleted.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddHours(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.ASCII.GetBytes("QKcOa8xPopVOliV6tpvuWmoKn4MOydSeIzUt4W4r1UlU2De7dTUYMlrgv3rU")), SecurityAlgorithms.HmacSha256Signature)
@@ -75,6 +76,14 @@ namespace WebApplicationBack.Services
             var token = tokenHandler.CreateToken(tokenDeskriptor);
             return tokenHandler.WriteToken(token);
 
+        }
+
+        public Boolean DeleteUser(int userId)
+        {
+            User user = UserSqlRepository.FindById(userId);
+            user.IsDeleted = true;
+            Boolean done = UserSqlRepository.Update(user);
+            return done;
         }
     }
 
