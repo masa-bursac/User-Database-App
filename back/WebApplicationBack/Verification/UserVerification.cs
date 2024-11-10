@@ -74,5 +74,17 @@ namespace WebApplicationBack.Verification
                 return false;
             return true;
         }
+
+        public bool VerifyLogin(User user)
+        {
+            this.user = user;
+            if (user == null)
+                return false;
+            else if (!VerifyEmail())
+                return false;
+            else if (!VerifyPassword())
+                return false;
+            return true;
+        }
     }
 }

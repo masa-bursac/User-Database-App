@@ -46,6 +46,7 @@ namespace WebApplicationBack.Controllers
         [HttpPost("login")]
         public IActionResult Login([FromBody] User u)
         {
+            if (!userVerification.VerifyLogin(u)) return BadRequest();
             User user = userService.FindByEmailAndPassword(u.Email, u.Password);
            
             if (user != null)
