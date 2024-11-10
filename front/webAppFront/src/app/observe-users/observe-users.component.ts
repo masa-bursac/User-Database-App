@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NavBarComponent } from "../nav-bar/nav-bar.component";
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-observe-users',
@@ -14,11 +14,16 @@ export class ObserveUsersComponent implements OnInit {
   dataSource = [];
   id: any = "";
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, private router: Router, private _snackBar: MatSnackBar) { }
 
   Delete(element: { id: number }){
-    this.id = element.id;
-    console.log(this.id);  
+    this.userService.DeleteUser(element.id).subscribe((data: any) =>{
+      this.ngOnInit();
+      this._snackBar.open('User deleted!', '', {
+        duration: 2000
+      });
+    });
+    
   }
 
   ngOnInit(): void {

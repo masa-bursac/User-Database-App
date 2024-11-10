@@ -20,10 +20,10 @@ namespace WebApplicationBack.Repositories
 
         public List<User> GetAll()
         {
-            return dbContext.Users.ToList();
+            return dbContext.Users.Where(user => !user.IsDeleted).ToList();
         }
 
-        public void saveUser(User user)
+            public void saveUser(User user)
         {
             int id = dbContext.Users.ToList().Count(); //iako je stavljeno da se sam inkrementira to ne radi, pa je dodato manuelno
             user.Id = id+1;
