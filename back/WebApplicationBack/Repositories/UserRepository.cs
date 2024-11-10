@@ -53,6 +53,19 @@ namespace WebApplicationBack.Repositories
 
             return null;
         }
+
+        public User FindById(int userId)
+        {
+            User u = dbContext.Users.Find(userId);
+            return u;
+        }
+
+        public bool Update(User user)
+        {
+            dbContext.Users.Update(user);
+            dbContext.SaveChanges();
+            return true;
+        }
     }
 }
 

@@ -76,6 +76,14 @@ namespace WebApplicationBack.Services
             return tokenHandler.WriteToken(token);
 
         }
+
+        public Boolean DeleteUser(int userId)
+        {
+            User user = UserSqlRepository.FindById(userId);
+            user.IsDeleted = true;
+            Boolean done = UserSqlRepository.Update(user);
+            return done;
+        }
     }
 
 }

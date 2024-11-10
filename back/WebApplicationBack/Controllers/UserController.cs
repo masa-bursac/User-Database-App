@@ -60,5 +60,17 @@ namespace WebApplicationBack.Controllers
             }
         }
 
+        [Authorize(Policy = "AdminPolicy")]
+        [HttpPost("delete")]
+        public IActionResult Delete([FromBody] int id)
+        {
+            Boolean done = userService.DeleteUser(id);
+
+            if (done) 
+                return Ok();
+            else
+                return BadRequest();
+        }
+
     }
 }
