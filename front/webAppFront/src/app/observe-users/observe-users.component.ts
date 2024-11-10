@@ -10,11 +10,16 @@ import { Router } from '@angular/router';
 })
 export class ObserveUsersComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'name', 'surname', 'email', 'date of birth','user type'];
+  displayedColumns: string[] = ['id', 'name', 'surname', 'email', 'date of birth','user type', 'delete'];
   dataSource = [];
   id: any = "";
 
   constructor(private userService: UserService, private router: Router) { }
+
+  Delete(element: { id: number }){
+    this.id = element.id;
+    console.log(this.id);  
+  }
 
   ngOnInit(): void {
     this.userService.GetAllUsers().subscribe((data: any)=>{
