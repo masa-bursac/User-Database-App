@@ -23,7 +23,6 @@ export class NavBarComponent implements OnInit {
   private getToken(): void {
     this.decodedToken = this.getDecodedAccessToken(JSON.parse(localStorage.getItem('jwtToken') || '{}'));
     this.role = this.decodedToken.role;
-    console.log(this.role);
   }
 
   getDecodedAccessToken(token: string): any {

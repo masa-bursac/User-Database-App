@@ -51,15 +51,19 @@ export class LoginComponent implements OnInit {
 
     if(this.validateForm.valid){
       this.authService.login(body).subscribe(data => {
-
-        localStorage.setItem("jwtToken", JSON.stringify(data));
         let tokenInfo = this.getDecodedToken( JSON.stringify(data));
-        localStorage.setItem('id', tokenInfo.id);
-        localStorage.setItem('role', tokenInfo.role);
-        localStorage.setItem('token', data);
-        localStorage.setItem('isDeleted', tokenInfo.isDeleted);
 
-        this.router.navigate(['/home'])
+        if(tokenInfo.isDeleted === "False"){
+          localStorage.setItem("jwtToken", JSON.stringify(data));
+          localStorage.setItem('id', tokenInfo.id);
+          localStorage.setItem('role', tokenInfo.role);
+          localStorage.setItem('token', data);
+          localStorage.setItem('isDeleted', tokenInfo.isDeleted);
+
+          this.router.navigate(['/home']);
+        }else{
+          alert("Admin deleted your profile!");
+        }
 
       }, error => {
         alert("User not found! Check your email and password!");
