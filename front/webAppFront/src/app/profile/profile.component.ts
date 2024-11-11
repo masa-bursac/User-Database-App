@@ -41,8 +41,8 @@ export class ProfileComponent implements OnInit {
       this.image = atob(data.image);
       this.imagePath = "data:image/png;base64,"+ atob(data.image);
       this.validateForm = this.fb.group({
-        name: [data.name,[Validators.required]],
-        surname: [data.surname, [Validators.required]],
+        name: [data.name,[Validators.required, , Validators.pattern('[A-ZČĆŠĐŽčćđžš][a-zčćđžš]*')]],
+        surname: [data.surname, [Validators.required, , Validators.pattern('[A-ZČĆŠĐŽčćđžš][a-zčćđžš]*')]],
         email: [{ value: data.email, disabled: true }, [Validators.required]],
         password: [null],
         new: [null],
@@ -65,9 +65,15 @@ export class ProfileComponent implements OnInit {
       dateOfBirth: this.validateForm.value.date,
       image: this.base64textString
     }
-    this.userService.UpdateUser(body).subscribe((data: any) =>{
-        this.ngOnInit();
-    });
+    if(this.validateForm.valid){
+      this.userService.UpdateUser(body).subscribe((data: any) =>{
+          this.ngOnInit();
+      });
+
+      console.log(this.validateForm.value.date)
+    }else{
+      alert("All fields are reguired and format must be valid!")
+    }
   }
 
   onSelect(event:any) {

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using WebApplicationBack.DTO;
 using WebApplicationBack.Model;
 using WebApplicationBack.Repositories;
 
@@ -78,11 +79,12 @@ namespace WebApplicationBack.Services
 
         }
 
-        public Boolean UpdateUser(User user, DTO.UserDto userDto)
+        public Boolean UpdateUser(User user, UserDto userDto)
         {
             user.Name = userDto.Name;
             user.Surname = userDto.Surname;
-            user.DateOfBirth = userDto.DateOfBirth;
+            TimeZoneInfo timeZone = TimeZoneInfo.FindSystemTimeZoneById("Central European Standard Time");
+            user.DateOfBirth = TimeZoneInfo.ConvertTime(userDto.DateOfBirth, timeZone);
             if (user.Image != null)
             {
                 user.Image = Encoding.ASCII.GetBytes(userDto.Image);

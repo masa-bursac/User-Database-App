@@ -7,7 +7,7 @@
       <form class="example-form" [formGroup]="validateForm" (ngSubmit)="submitForm()">
         <mat-card-content>
           <div>  
-            <img *ngIf="imagePath !== 'data:image/png;base64'" [src]="imagePath" class = "imgShow" />
+            <img *ngIf="imagePath !== 'data:image/png;base64,'" [src]="imagePath" class = "imgShow" />
             </div>
           <mat-form-field class="example-full-width">
             <input matInput placeholder="Name" formControlName="name">
