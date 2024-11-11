@@ -69,8 +69,6 @@ export class ProfileComponent implements OnInit {
       this.userService.UpdateUser(body).subscribe((data: any) =>{
           this.ngOnInit();
       });
-
-      console.log(this.validateForm.value.date)
     }else{
       alert("All fields are reguired and format must be valid!")
     }

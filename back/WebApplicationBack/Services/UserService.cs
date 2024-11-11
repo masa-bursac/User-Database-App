@@ -85,7 +85,7 @@ namespace WebApplicationBack.Services
             user.Surname = userDto.Surname;
             TimeZoneInfo timeZone = TimeZoneInfo.FindSystemTimeZoneById("Central European Standard Time");
             user.DateOfBirth = TimeZoneInfo.ConvertTime(userDto.DateOfBirth, timeZone);
-            if (user.Image != null)
+            if (user.Image != null && !userDto.Image.Equals("")) 
             {
                 user.Image = Encoding.ASCII.GetBytes(userDto.Image);
             }
