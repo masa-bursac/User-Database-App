@@ -8,7 +8,7 @@ const auth_url = 'http://localhost:5000/api/user';
   providedIn: 'root'
 })
 export class UserService {
-  
+    
   constructor(private http: HttpClient) { }
 
   public GetAllUsers() : Observable<any>{
@@ -21,5 +21,9 @@ export class UserService {
 
   public GetUser(id: number) : Observable<any> {
     return this.http.get(`${auth_url}/findById/${id}`);
+  }
+
+  public UpdateUser(body: any): Observable<any>  {
+    return this.http.post(auth_url+"/update", body,  { responseType: 'text' as 'json'});
   }
 }

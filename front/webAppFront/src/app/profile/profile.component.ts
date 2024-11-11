@@ -15,7 +15,7 @@ export class ProfileComponent implements OnInit {
       surname: new FormControl(),
       email: new FormControl({ value: '', disabled: true }),
       password: new FormControl(),
-      newPassword: new FormControl(),
+      new: new FormControl(),
       date: new FormControl(),
   });
   hide: boolean = true;
@@ -40,7 +40,7 @@ export class ProfileComponent implements OnInit {
         surname: [data.surname, [Validators.required]],
         email: [{ value: data.email, disabled: true }, [Validators.required]],
         password: [null],
-        newPassword: [null],
+        new: [null],
         date: [data.dateOfBirth, [Validators.required]]
       }); 
   }, error => {
@@ -50,7 +50,19 @@ export class ProfileComponent implements OnInit {
   }
 
   submitForm() : void {
-
+   
+    const body = {
+      id: Number(localStorage.getItem('id')),
+      checkPassword: this.validateForm.value.password,
+      newPassword: this.validateForm.value.new,
+      name: this.validateForm.value.name,
+      surname: this.validateForm.value.surname,
+      dateOfBirth: this.validateForm.value.date,
+      image: ""
+    }
+    this.userService.UpdateUser(body).subscribe((data: any) =>{
+      
+    });
   }
 
   onSelect(event:any) {
