@@ -83,8 +83,11 @@ namespace WebApplicationBack.Services
             user.Name = userDto.Name;
             user.Surname = userDto.Surname;
             user.DateOfBirth = userDto.DateOfBirth;
-            user.Image = Encoding.ASCII.GetBytes(userDto.Image);
-
+            if (user.Image != null)
+            {
+                user.Image = Encoding.ASCII.GetBytes(userDto.Image);
+            }
+       
             if (userDto.CheckPassword != null)
             {
                 Boolean check = ComparePasswordInDatabase(user.Password, userDto.CheckPassword);

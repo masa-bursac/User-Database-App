@@ -20,9 +20,11 @@ export class ProfileComponent implements OnInit {
   });
   hide: boolean = true;
   files: File[] = [];
-  base64textString: any;
+  base64textString: any = "";
   id: any;
   password: any;
+  imagePath: any;
+  image: any;
 
   constructor(private fb: FormBuilder, private userService: UserService, private router: Router) { }
 
@@ -32,9 +34,12 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = localStorage.getItem('id');
+    
     this.userService.GetUser(Number(this.id)).subscribe((data: any)=>{
-      console.log(data)
+
       this.password = data.password;
+      this.image = atob(data.image);
+      this.imagePath = "data:image/png;base64,"+ atob(data.image);
       this.validateForm = this.fb.group({
         name: [data.name,[Validators.required]],
         surname: [data.surname, [Validators.required]],
@@ -58,10 +63,10 @@ export class ProfileComponent implements OnInit {
       name: this.validateForm.value.name,
       surname: this.validateForm.value.surname,
       dateOfBirth: this.validateForm.value.date,
-      image: ""
+      image: this.base64textString
     }
     this.userService.UpdateUser(body).subscribe((data: any) =>{
-      
+        this.ngOnInit();
     });
   }
 
