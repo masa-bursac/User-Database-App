@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -17,5 +17,9 @@ export class UserService {
 
   public DeleteUser(id: number) : any {
     return this.http.post(auth_url+'/delete', id);
+  }
+
+  public GetUser(id: number) : Observable<any> {
+    return this.http.get(`${auth_url}/findById/${id}`);
   }
 }

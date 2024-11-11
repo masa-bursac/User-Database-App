@@ -74,9 +74,10 @@ namespace WebApplicationBack.Controllers
                 return BadRequest();
         }
 
-        [HttpGet("findById")]
-        public IActionResult GetUser([FromBody] int id)
+        [HttpGet("findById/{id}")]
+        public IActionResult GetUser(int id)
         {
+            if (id == 0) return BadRequest();
             User user = userService.FindUserById(id);
             UserDto returnUser = new UserDto(user);
             return Ok(returnUser);
