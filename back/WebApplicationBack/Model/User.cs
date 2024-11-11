@@ -5,11 +5,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebApplicationBack.DTO;
 
 namespace WebApplicationBack.Model
 {
     public class User
     {
+        private UserDto userDto;
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
@@ -51,5 +54,19 @@ namespace WebApplicationBack.Model
         }
 
         public User() { }
+
+        public User(UserDto userDto)
+        {
+            Id = userDto.Id;
+            Email = userDto.Email;
+            Password = userDto.Password;
+            Name = userDto.Name;
+            Surname = userDto.Surname;
+            DateOfBirth = userDto.DateOfBirth;
+            UserType = userDto.UserType;
+            Token = null;
+            Image = Encoding.ASCII.GetBytes(userDto.Image);
+            IsDeleted = userDto.IsDeleted;
+        }
     }
 }

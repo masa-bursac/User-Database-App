@@ -82,5 +82,17 @@ namespace WebApplicationBack.Controllers
             UserDto returnUser = new UserDto(user);
             return Ok(returnUser);
         }
+
+        [HttpPost("update")]
+        public IActionResult Update([FromBody] UserDto userDto)
+        {
+            User user = userService.FindUserById(userDto.Id);
+            Boolean done = userService.UpdateUser(user, userDto);
+
+            if (done)
+                return Ok();
+            else
+                return BadRequest();
+        }
     }
 }

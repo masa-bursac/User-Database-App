@@ -78,6 +78,30 @@ namespace WebApplicationBack.Services
 
         }
 
+        public Boolean UpdateUser(User user, DTO.UserDto userDto)
+        {
+            user.Name = userDto.Name;
+            user.Surname = userDto.Surname;
+            user.DateOfBirth = userDto.DateOfBirth;
+            user.Image = Encoding.ASCII.GetBytes(userDto.Image);
+
+            Boolean done = CheckPassword(user.Password, userDto.Password);
+            if (done)
+                user.Password = new PasswordHasher<object>().HashPassword(null, userDto.NewPassword);
+            else
+                Console.WriteLine("nije isto");
+
+            return UserSqlRepository.Update(user);
+        }
+
+        public Boolean CheckPassword(String passwordUser, String passwordUserDto)
+        {
+            if (passwordUser.Equals(passwordUserDto))
+                return true;
+            else
+                return false;
+        }
+
         public User FindUserById(int id)
         {
             return UserSqlRepository.FindById(id);
