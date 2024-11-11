@@ -78,6 +78,11 @@ namespace WebApplicationBack.Services
 
         }
 
+        public User FindUserById(int id)
+        {
+            return UserSqlRepository.FindById(id);
+        }
+
         public Boolean DeleteUser(int userId)
         {
             User user = UserSqlRepository.FindById(userId);

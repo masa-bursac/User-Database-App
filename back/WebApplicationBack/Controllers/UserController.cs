@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using WebApplicationBack.DTO;
 using WebApplicationBack.Model;
 using WebApplicationBack.Repositories;
 using WebApplicationBack.Services;
@@ -39,6 +40,7 @@ namespace WebApplicationBack.Controllers
         public IActionResult Register([FromBody] User user)
         {
             if (!userVerification.Verify(user)) return BadRequest();
+            user.Image = new byte[0];
             userService.SaveUser(user, dbContext);
             return Ok();
         }
@@ -72,5 +74,12 @@ namespace WebApplicationBack.Controllers
                 return BadRequest();
         }
 
+        [HttpGet("findById")]
+        public IActionResult GetUser([FromBody] int id)
+        {
+            User user = userService.FindUserById(id);
+            UserDto returnUser = new UserDto(user);
+            return Ok(returnUser);
+        }
     }
 }
