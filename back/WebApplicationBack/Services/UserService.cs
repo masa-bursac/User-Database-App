@@ -85,21 +85,33 @@ namespace WebApplicationBack.Services
             user.DateOfBirth = userDto.DateOfBirth;
             user.Image = Encoding.ASCII.GetBytes(userDto.Image);
 
-            Boolean done = CheckPassword(user.Password, userDto.Password);
-            if (done)
-                user.Password = new PasswordHasher<object>().HashPassword(null, userDto.NewPassword);
-            else
-                Console.WriteLine("nije isto");
+            Boolean check = ComparePasswordInDatabase(user.Password, userDto.CheckPassword);
 
-            return UserSqlRepository.Update(user);
+            if (check)
+            {
+                user.Password = new PasswordHasher<object>().HashPassword(null, userDto.NewPassword);
+                
+                return UserSqlRepository.Update(user);
+            }
+
+            return false;
         }
 
-        public Boolean CheckPassword(String passwordUser, String passwordUserDto)
+        public Boolean ComparePasswordInDatabase(String databasePassword, string checkPassword)
         {
-            if (passwordUser.Equals(passwordUserDto))
-                return true;
-            else
-                return false;
+            var passwordHasher = new PasswordHasher<object>();
+
+  
+            var result = passwordHasher.VerifyHashedPassword(null, databasePassword, checkPassword);
+
+                if (result == PasswordVerificationResult.Success)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
         }
 
         public User FindUserById(int id)

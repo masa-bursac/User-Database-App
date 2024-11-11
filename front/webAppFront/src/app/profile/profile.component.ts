@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../services/user.service';
 import { Route, Router } from '@angular/router';
 
@@ -10,7 +10,14 @@ import { Route, Router } from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
 
-  validateForm!: FormGroup;
+  validateForm = new FormGroup({
+      name: new FormControl(),
+      surname: new FormControl(),
+      email: new FormControl({ value: '', disabled: true }),
+      password: new FormControl(),
+      newPassword: new FormControl(),
+      date: new FormControl(),
+  });
   hide: boolean = true;
   files: File[] = [];
   base64textString: any;
@@ -24,15 +31,6 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    this.validateForm = this.fb.group({
-      name: [null,[Validators.required]],
-      surname: [null, [Validators.required]],
-      email: [null, [Validators.required]],
-      password: [null, [Validators.required]],
-      date: [null, [Validators.required]]
-    })
-
     this.id = localStorage.getItem('id');
     this.userService.GetUser(Number(this.id)).subscribe((data: any)=>{
       console.log(data)
@@ -40,8 +38,9 @@ export class ProfileComponent implements OnInit {
       this.validateForm = this.fb.group({
         name: [data.name,[Validators.required]],
         surname: [data.surname, [Validators.required]],
-        email: [data.email, [Validators.required]],
-        password: [null, [Validators.required]],
+        email: [{ value: data.email, disabled: true }, [Validators.required]],
+        password: [null],
+        newPassword: [null],
         date: [data.dateOfBirth, [Validators.required]]
       }); 
   }, error => {
