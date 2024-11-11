@@ -50,6 +50,9 @@ namespace WebApplicationBack
                 // Policy for Admin role
                 options.AddPolicy("AdminPolicy", policy =>
                     policy.RequireClaim(ClaimTypes.Role, "admin"));
+                options.AddPolicy("LoggedPolicy", policy =>
+                    policy.RequireClaim(ClaimTypes.Role).RequireRole("admin", "user"));
+
             });
 
             services.AddControllers();

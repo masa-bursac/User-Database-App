@@ -74,6 +74,7 @@ namespace WebApplicationBack.Controllers
                 return BadRequest();
         }
 
+        [Authorize(Policy = "LoggedPolicy")]
         [HttpGet("findById/{id}")]
         public IActionResult GetUser(int id)
         {
@@ -83,6 +84,7 @@ namespace WebApplicationBack.Controllers
             return Ok(returnUser);
         }
 
+        [Authorize(Policy = "LoggedPolicy")]
         [HttpPost("update")]
         public IActionResult Update([FromBody] UserDto userDto)
         {
