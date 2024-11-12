@@ -21,6 +21,7 @@ namespace WebApplicationBack.Controllers
         public UserService userService = new UserService();
         public UserRepository userRepository = new UserRepository();
         public UserVerification userVerification = new UserVerification();
+        public UpdateVerification updateVerification = new UpdateVerification();
 
         public UserController(MyDbContext context)
         {
@@ -88,7 +89,7 @@ namespace WebApplicationBack.Controllers
         [HttpPost("update")]
         public IActionResult Update([FromBody] UserDto userDto)
         {
-            //validation
+            if (!updateVerification.VerifyUpdate(userDto)) return BadRequest();
             User user = userService.FindUserById(userDto.Id);
             Boolean done = userService.UpdateUser(user, userDto);
 
