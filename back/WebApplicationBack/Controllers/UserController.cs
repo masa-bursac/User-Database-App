@@ -99,6 +99,7 @@ namespace WebApplicationBack.Controllers
                 return BadRequest();
         }
 
+        [Authorize(Policy = "AdminPolicy")]
         [HttpPost("search")]
         public IActionResult Search([FromBody] SearchDto searchDto)
         {

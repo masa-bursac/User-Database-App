@@ -26,7 +26,7 @@ export class ProfileComponent implements OnInit {
   password: any;
   imagePath: any;
   image: any;
-
+  
   constructor(private fb: FormBuilder, private userService: UserService, private router: Router, private _snackBar: MatSnackBar) { }
 
   public hasError = (controlName: string, errorName: string) =>{

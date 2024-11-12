@@ -1,4 +1,27 @@
 <app-nav-bar></app-nav-bar>
+<form class="example-form" [formGroup]="validateForm" (ngSubmit)="search()">
+  <div class="form-row">
+    <mat-form-field class="form-group col-md-4">
+      <input matInput placeholder="Search by Email" formControlName="email">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="form-group col-md-4">
+      <mat-label>Choose a start date</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="startDate">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="form-group col-md-4">
+      <mat-label>Choose a end date</mat-label>
+      <input matInput [matDatepicker]="picker1" formControlName="endDate">
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+
+    <button mat-stroked-button color="accent" class="btn-block">Update</button>
+  </div>
+</form>
 <table id="table" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
     <ng-container matColumnDef="id">

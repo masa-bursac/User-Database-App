@@ -74,14 +74,14 @@ namespace WebApplicationBack.Repositories
             List<User> returnUsers = new List<User>();
 
             TimeZoneInfo timeZone = TimeZoneInfo.FindSystemTimeZoneById("Central European Standard Time");
-            searchDto.startDate = TimeZoneInfo.ConvertTime(searchDto.startDate, timeZone);
-            searchDto.endDate = TimeZoneInfo.ConvertTime(searchDto.endDate, timeZone);
+            searchDto.StartDate = TimeZoneInfo.ConvertTime(searchDto.StartDate, timeZone);
+            searchDto.EndDate = TimeZoneInfo.ConvertTime(searchDto.EndDate, timeZone);
 
             if (searchDto.Email == null)
                 searchDto.Email = "";
 
             foreach (User u in users){
-                if (u.Email.Contains(searchDto.Email) && u.DateOfBirth >= searchDto.startDate && u.DateOfBirth <= searchDto.endDate)
+                if (u.Email.Contains(searchDto.Email) && u.DateOfBirth >= searchDto.StartDate && u.DateOfBirth <= searchDto.EndDate)
                 {
                     returnUsers.Add(u);
                 }
