@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApplicationBack.DTO;
 using WebApplicationBack.Model;
 
 namespace WebApplicationBack.Repositories
@@ -65,6 +66,27 @@ namespace WebApplicationBack.Repositories
             dbContext.Users.Update(user);
             dbContext.SaveChanges();
             return true;
+        }
+
+        public List<User> SearchUsers(SearchDto searchDto)
+        {
+            List<User> users = GetAll();
+            List<User> returnUsers = new List<User>();
+
+            TimeZoneInfo timeZone = TimeZoneInfo.FindSystemTimeZoneById("Central European Standard Time");
+            searchDto.startDate = TimeZoneInfo.ConvertTime(searchDto.startDate, timeZone);
+            searchDto.endDate = TimeZoneInfo.ConvertTime(searchDto.endDate, timeZone);
+
+            if (searchDto.Email == null)
+                searchDto.Email = "";
+
+            foreach (User u in users){
+                if (u.Email.Contains(searchDto.Email) && u.DateOfBirth >= searchDto.startDate && u.DateOfBirth <= searchDto.endDate)
+                {
+                    returnUsers.Add(u);
+                }
+            }
+            return returnUsers;
         }
     }
 }
