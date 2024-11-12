@@ -98,5 +98,13 @@ namespace WebApplicationBack.Controllers
             else
                 return BadRequest();
         }
+
+        [Authorize(Policy = "AdminPolicy")]
+        [HttpPost("search")]
+        public IActionResult Search([FromBody] SearchDto searchDto)
+        {
+            userRepository.dbContext = dbContext;
+            return Ok(userRepository.SearchUsers(searchDto));
+        }
     }
 }

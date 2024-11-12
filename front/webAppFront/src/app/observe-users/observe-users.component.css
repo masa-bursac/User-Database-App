@@ -1,3 +1,18 @@
 table {
     width: 100%;
   }
+
+  .example-form .form-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .example-form .form-group {
+    flex: 1;
+    margin: 0 10px;
+  }
+  
+  .example-form .btn-block {
+    margin-left: 10px;
+  }

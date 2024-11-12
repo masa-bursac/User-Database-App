@@ -26,4 +26,8 @@ export class UserService {
   public UpdateUser(body: any): Observable<any>  {
     return this.http.post(auth_url+"/update", body,  { responseType: 'text' as 'json'});
   }
+
+  public Search(body: any): Observable<any>  {
+    return this.http.post(auth_url+"/search", body);
+  }
 }
