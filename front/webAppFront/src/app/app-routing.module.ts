@@ -5,6 +5,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
 import { ObserveUsersComponent } from './observe-users/observe-users.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   {path: 'home', component: HomePageComponent},
@@ -12,7 +13,8 @@ const routes: Routes = [
   {path: '', pathMatch:'full', redirectTo: 'welcome'},
   {path: 'registration', component: RegistrationComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'allUsers', component: ObserveUsersComponent}
+  {path: 'allUsers', component: ObserveUsersComponent},
+  {path: 'profile', component: ProfileComponent}
 ];
 
 @NgModule({

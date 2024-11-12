@@ -12,6 +12,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
 import { Interceptor} from './interceptor.service'; 
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSelectModule } from '@angular/material/select';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -23,6 +25,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegistrationComponent } from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
 import { ObserveUsersComponent } from './observe-users/observe-users.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,8 @@ import { ObserveUsersComponent } from './observe-users/observe-users.component';
     NavBarComponent,
     RegistrationComponent,
     LoginComponent,
-    ObserveUsersComponent
+    ObserveUsersComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +53,9 @@ import { ObserveUsersComponent } from './observe-users/observe-users.component';
     MatIconModule,
     HttpClientModule,
     MatTableModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatSelectModule,
+    NgxDropzoneModule
   ],
   providers: [
     { 

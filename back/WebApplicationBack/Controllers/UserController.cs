@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using WebApplicationBack.DTO;
 using WebApplicationBack.Model;
 using WebApplicationBack.Repositories;
 using WebApplicationBack.Services;
@@ -20,6 +21,7 @@ namespace WebApplicationBack.Controllers
         public UserService userService = new UserService();
         public UserRepository userRepository = new UserRepository();
         public UserVerification userVerification = new UserVerification();
+        public UpdateVerification updateVerification = new UpdateVerification();
 
         public UserController(MyDbContext context)
         {
@@ -39,6 +41,7 @@ namespace WebApplicationBack.Controllers
         public IActionResult Register([FromBody] User user)
         {
             if (!userVerification.Verify(user)) return BadRequest();
+            user.Image = new byte[0];
             userService.SaveUser(user, dbContext);
             return Ok();
         }
@@ -72,5 +75,28 @@ namespace WebApplicationBack.Controllers
                 return BadRequest();
         }
 
+        [Authorize(Policy = "LoggedPolicy")]
+        [HttpGet("findById/{id}")]
+        public IActionResult GetUser(int id)
+        {
+            if (id == 0) return BadRequest();
+            User user = userService.FindUserById(id);
+            UserDto returnUser = new UserDto(user);
+            return Ok(returnUser);
+        }
+
+        [Authorize(Policy = "LoggedPolicy")]
+        [HttpPost("update")]
+        public IActionResult Update([FromBody] UserDto userDto)
+        {
+            if (!updateVerification.VerifyUpdate(userDto)) return BadRequest();
+            User user = userService.FindUserById(userDto.Id);
+            Boolean done = userService.UpdateUser(user, userDto);
+
+            if (done)
+                return Ok();
+            else
+                return BadRequest();
+        }
     }
 }

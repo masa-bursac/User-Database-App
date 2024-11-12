@@ -7,6 +7,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using WebApplicationBack.DTO;
 using WebApplicationBack.Model;
 using WebApplicationBack.Repositories;
 
@@ -76,6 +77,55 @@ namespace WebApplicationBack.Services
             var token = tokenHandler.CreateToken(tokenDeskriptor);
             return tokenHandler.WriteToken(token);
 
+        }
+
+        public Boolean UpdateUser(User user, UserDto userDto)
+        {
+            user.Name = userDto.Name;
+            user.Surname = userDto.Surname;
+            TimeZoneInfo timeZone = TimeZoneInfo.FindSystemTimeZoneById("Central European Standard Time");
+            user.DateOfBirth = TimeZoneInfo.ConvertTime(userDto.DateOfBirth, timeZone);
+            if (user.Image != null && !userDto.Image.Equals("")) 
+            {
+                user.Image = Encoding.ASCII.GetBytes(userDto.Image);
+            }
+       
+            if (userDto.CheckPassword != null)
+            {
+                Boolean check = ComparePasswordInDatabase(user.Password, userDto.CheckPassword);
+
+                if (check)
+                {
+                    user.Password = new PasswordHasher<object>().HashPassword(null, userDto.NewPassword);
+
+                    return UserSqlRepository.Update(user);
+                }
+                return false;
+            }
+
+            return UserSqlRepository.Update(user);
+        }
+
+        public Boolean ComparePasswordInDatabase(String databasePassword, string checkPassword)
+        {
+            var passwordHasher = new PasswordHasher<object>();
+
+  
+            var result = passwordHasher.VerifyHashedPassword(null, databasePassword, checkPassword);
+
+                if (result == PasswordVerificationResult.Success)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+        }
+
+        public User FindUserById(int id)
+        {
+            return UserSqlRepository.FindById(id);
         }
 
         public Boolean DeleteUser(int userId)
