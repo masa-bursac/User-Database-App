@@ -88,6 +88,7 @@ namespace WebApplicationBack.Controllers
         [HttpPost("update")]
         public IActionResult Update([FromBody] UserDto userDto)
         {
+            //validation
             User user = userService.FindUserById(userDto.Id);
             Boolean done = userService.UpdateUser(user, userDto);
 

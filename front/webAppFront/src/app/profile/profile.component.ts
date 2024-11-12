@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../services/user.service';
 import { Route, Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-profile',
@@ -26,7 +27,7 @@ export class ProfileComponent implements OnInit {
   imagePath: any;
   image: any;
 
-  constructor(private fb: FormBuilder, private userService: UserService, private router: Router) { }
+  constructor(private fb: FormBuilder, private userService: UserService, private router: Router, private _snackBar: MatSnackBar) { }
 
   public hasError = (controlName: string, errorName: string) =>{
     return this.validateForm.controls[controlName].hasError(errorName);
@@ -67,7 +68,14 @@ export class ProfileComponent implements OnInit {
     }
     if(this.validateForm.valid){
       this.userService.UpdateUser(body).subscribe((data: any) =>{
+        this._snackBar.open('User updated!', '', {
+          duration: 2000
+        });
           this.ngOnInit();
+      }, error => {
+        if(error.status == 400){
+          alert("Old password doesn't match!");
+        }
       });
     }else{
       alert("All fields are reguired and format must be valid!")
