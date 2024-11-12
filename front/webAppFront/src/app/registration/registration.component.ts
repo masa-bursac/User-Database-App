@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -19,7 +20,7 @@ export class RegistrationComponent implements OnInit {
   hide: boolean = true;
   hideRp: boolean = true;
 
-  constructor(private fb: FormBuilder, private authService: AuthService) { }
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) { }
 
   public hasError = (controlName: string, errorName: string) =>{
     return this.validateForm.controls[controlName].hasError(errorName);
@@ -67,7 +68,7 @@ export class RegistrationComponent implements OnInit {
       console.log(body.dateOfBirth)
       this.authService.registration(body).subscribe(data => { 
           alert("Registration successfull");
-          //this.router.navigate(['login']);
+          this.router.navigate(['login']);
       }, error => {
         console.log(error.status);
         if(error.status == 400){

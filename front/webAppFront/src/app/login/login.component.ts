@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('token', data);
           localStorage.setItem('isDeleted', tokenInfo.isDeleted);
 
-          this.router.navigate(['/home']);
+          this.router.navigate(['/profile']);
         }else{
           alert("Admin deleted your profile!");
         }
