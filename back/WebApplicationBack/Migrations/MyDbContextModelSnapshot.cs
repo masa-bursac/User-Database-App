@@ -66,7 +66,7 @@ namespace WebApplicationBack.Migrations
                             Image = new byte[0],
                             IsDeleted = false,
                             Name = "Miki",
-                            Password = "AQAAAAEAACcQAAAAEAzjJqJFLYnuSy+pPFLyVi+aFpl96enyKanRGZxDNwJJDy/qf2+FDuO8f4T7sdfWog==",
+                            Password = "AQAAAAEAACcQAAAAEAzjJqJFLYnuSy+pPFLyVi+aFpl96enyKanRGZxDNwJJDy/qf2+FDuO8f4T7sdfWog==",//"admin"
                             Surname = "Milic",
                             UserType = 1
                         });

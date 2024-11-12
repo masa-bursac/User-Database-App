@@ -1,0 +1,5 @@
+Poštovani,
+Front end je kucan u Angularu, dok je backend u C#.NET core, pri čemu je korišćena postgreSQL
+baza.
+Odrađene su sve osnovne funkcionalnosti. 
+Admin koji je dodat u bazu pomoću dbContext-a ima hashiranu šifru "admin".

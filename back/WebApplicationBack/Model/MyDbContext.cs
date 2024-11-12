@@ -24,6 +24,8 @@ namespace WebApplicationBack.Model
             modelBuilder.Entity<User>().HasData(
                 new User(1, "admin@gmail.com", "AQAAAAEAACcQAAAAEAzjJqJFLYnuSy+pPFLyVi+aFpl96enyKanRGZxDNwJJDy/qf2+FDuO8f4T7sdfWog==", "Miki", "Milic", new DateTime(1998, 04, 20), UserType.admin)
             );
+
+            //sifra je hashirani "admin"
         }
 
     }
