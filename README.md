@@ -5,5 +5,7 @@
 - Admin moze da obrise profil korisnika. Korisnik ciji je profil obrisan mora da dobije notifikaciju o tome prilikom sledeceg pokusaja prijave.
 - Admin moze da filtrira i pretrazuje korisnike po emailu ili datumu rodjenja.
 
-**- C# .NET na backendu, Angular na frontendu**
-**- korišćena PostgreSQL baza podataka, uz Entity Framework**
+<br>
+
+- **C# .NET na backendu, Angular na frontendu**
+- **korišćena PostgreSQL baza podataka, uz Entity Framework****
